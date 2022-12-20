@@ -1,0 +1,113 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menu') %>
+
+<main>
+    <br>
+    <br>
+    <%- include ('../partials/message') %>
+    <br>
+    <div class="container-fluid  w-75 mx-auto bg-light rounded shadow-lg border border-dark">
+        <br>
+        <h2>Search drinks by name</h2>
+        <form action="/home" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchInput" name="drinkName" placeholder="Drink Name">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <% if(locals.data) { %>
+        <h2>Results</h2>
+        <hr>
+        <br>
+        <div class="row align-items-start">
+            <div class="col ms-auto">
+                <% if(locals.data.drinks[0].strDrinkThumb) { %>
+                    <img src="<%- locals.data.drinks[0].strDrinkThumb %>" class="border border-dark"alt="<%- locals.data.drinks[0].strDrink %>">
+                <% } else {%>
+                    <h4>Link Unavailable</h4>
+                <% } %>
+            </div>
+            <div class="col">
+                <form action="/reviews" method="GET">
+                    <button class="btn btn-outline-primary ml-auto float-end" href="/reviews">Add Review</button>
+                </form>
+                <h1>
+                <% if (locals.data.drinks[0].strDrink) { %>
+                    <%- locals.data.drinks[0].strDrink %>
+                <% } else { %>
+                    Link Unavailable
+                <% } %>
+                </h1>
+                <hr>
+                <h4>
+                    Alcoholic? - 
+                    <% if (locals.data.drinks[0].strAlcoholic == "Alcoholic") { %>
+                        Yes
+                    <% } else if (locals.data.drinks[0].strAlcoholic == "Non alcoholic") {%>
+                        No
+                    <% } else { %>
+                        Link Unavailable
+                    <% } %>
+                </h4>
+                <hr>
+                <h4>
+                     Glass Type - 
+                     <% if (locals.data.drinks[0].strGlass) { %>
+                        <%- locals.data.drinks[0].strGlass %>
+                    <% } else { %>
+                        Link Unavailable
+                    <% } %>
+                </h4>
+                <hr>
+                <h4> Instructions:</h4>
+                <h5>
+                <% if (locals.data.drinks[0].strInstructions) { %>
+                    <%- locals.data.drinks[0].strInstructions %>
+                <% } else { %>
+                    Link Unavailable
+                <% } %>
+                </h5>
+                <hr>
+                <h4>Ingredients</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Measurement</th>
+                            <th scope="col">Name</th>
+                        </tr>
+                    </thead>
+                    <% if (locals.data.drinks[0].strMeasure1 == null)  { %>
+                        Link Unavailible
+                    <% } else {%>
+                        <% for(i = 1; ((eval(`locals.data.drinks[0].strMeasure${i}`) != null) || (eval(`locals.data.drinks[0].strIngredient${i}`) != null)); i++) { %>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><%- i %></th>
+                                <% if (eval(`locals.data.drinks[0].strMeasure${i}`)) { %>
+                                    <td><%- eval(`locals.data.drinks[0].strMeasure${i}`) %></td>
+                                <% } else { %>
+                                    <td>-</td>
+                                <% } %>
+                                <% if (eval(`locals.data.drinks[0].strIngredient${i}`)) { %>
+                                    <td><%- eval(`locals.data.drinks[0].strIngredient${i}`) %></td>
+                                <% } else { %>
+                                    <td>-</td>
+                                <% } %>
+                            </tr>
+                        </tbody>
+                        <% } %>
+                    <% } %>
+                </table>
+            </div>
+        </div>
+        <% } %>
+        <br>
+    </div>
+    <br>
+</main>
+
+<%- include ('../partials/footer') %>
