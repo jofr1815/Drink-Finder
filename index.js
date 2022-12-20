@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const port = process.env.PORT || 3001;
 
 app.set('view engine', 'ejs');
 
@@ -58,5 +59,4 @@ app.get('/reviews', (req, res) => {
     });
 });
 
-app.listen(3000);
-console.log('Server is listening on port 3000');
+app.listen(port, () => console.log(`Web server listening on port ${port}!`));
