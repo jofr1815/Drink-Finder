@@ -19,13 +19,14 @@
         </form>
         <br>
         <% if(locals.drinks) { %>
-        <h2>Results</h2>
+            <h2>Results</h2>
+            <% drinks.forEach((drink) => { %>
         <hr>
         <br>
         <div class="row align-items-start">
             <div class="col-sm-6 ms-auto">
-                <% if(drinks[0].strDrinkThumb) { %>
-                    <img src="<%- drinks[0].strDrinkThumb %>" class="border border-dark" alt="<%- drinks[0].strDrink %>" style="width: 100%;">
+                <% if(drink.strDrinkThumb) { %>
+                    <img src="<%- drink.strDrinkThumb %>" class="border border-dark" alt="<%- drink.strDrink %>" style="width: 100%;">
                 <% } else {%>
                     <h4>Link Unavailable</h4>
                 <% } %>
@@ -35,8 +36,8 @@
                     <button class="btn btn-outline-primary ml-auto float-end" href="/reviews">Add Review</button>
                 </form>
                 <h1>
-                <% if (drinks[0].strDrink) { %>
-                    <%- drinks[0].strDrink %>
+                <% if (drink.strDrink) { %>
+                    <%- drink.strDrink %>
                 <% } else { %>
                     Link Unavailable
                 <% } %>
@@ -44,9 +45,9 @@
                 <hr>
                 <h4>
                     Alcoholic? - 
-                    <% if (drinks[0].strAlcoholic == "Alcoholic") { %>
+                    <% if (drink.strAlcoholic == "Alcoholic") { %>
                         Yes
-                    <% } else if (drinks[0].strAlcoholic == "Non alcoholic") {%>
+                    <% } else if (drink.strAlcoholic == "Non alcoholic") {%>
                         No
                     <% } else { %>
                         Link Unavailable
@@ -55,8 +56,8 @@
                 <hr>
                 <h4>
                      Glass Type - 
-                     <% if (drinks[0].strGlass) { %>
-                        <%- drinks[0].strGlass %>
+                     <% if (drink.strGlass) { %>
+                        <%- drink.strGlass %>
                     <% } else { %>
                         Link Unavailable
                     <% } %>
@@ -64,8 +65,8 @@
                 <hr>
                 <h4> Instructions:</h4>
                 <h5>
-                <% if (drinks[0].strInstructions) { %>
-                    <%- drinks[0].strInstructions %>
+                <% if (drink.strInstructions) { %>
+                    <%- drink.strInstructions %>
                 <% } else { %>
                     Link Unavailable
                 <% } %>
@@ -80,20 +81,20 @@
                             <th scope="col">Name</th>
                         </tr>
                     </thead>
-                    <% if (drinks[0].strMeasure1 == null)  { %>
+                    <% if (drink.strMeasure1 == null)  { %>
                         Link Unavailible
                     <% } else {%>
-                        <% for(i = 1; ((eval(`drinks[0].strMeasure${i}`) != null) || (eval(`drinks[0].strIngredient${i}`) != null)); i++) { %>
+                        <% for(i = 1; ((eval(`drink.strMeasure${i}`) != null) || (eval(`drink.strIngredient${i}`) != null)); i++) { %>
                         <tbody>
                             <tr>
                                 <th scope="row"><%- i %></th>
-                                <% if (eval(`drinks[0].strMeasure${i}`)) { %>
-                                    <td><%- eval(`drinks[0].strMeasure${i}`) %></td>
+                                <% if (eval(`drink.strMeasure${i}`)) { %>
+                                    <td><%- eval(`drink.strMeasure${i}`) %></td>
                                 <% } else { %>
                                     <td>-</td>
                                 <% } %>
-                                <% if (eval(`drinks[0].strIngredient${i}`)) { %>
-                                    <td><%- eval(`drinks[0].strIngredient${i}`) %></td>
+                                <% if (eval(`drink.strIngredient${i}`)) { %>
+                                    <td><%- eval(`drink.strIngredient${i}`) %></td>
                                 <% } else { %>
                                     <td>-</td>
                                 <% } %>
@@ -104,6 +105,7 @@
                 </table>
             </div>
         </div>
+            <% }); %>
         <% } %>
         <br>
     </div>
