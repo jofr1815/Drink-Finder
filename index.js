@@ -30,7 +30,7 @@ app.get('/home', (req, res) =>{
         .then(results =>{
             if(results.data.drinks){
                 res.render('pages/main', {
-                    data: results.data
+                    drinks: results.data.drinks
                 });
             } else {
                 res.render('pages/main', {

@@ -18,25 +18,25 @@
             </div>
         </form>
         <br>
-        <% if(locals.data) { %>
+        <% if(locals.drinks) { %>
         <h2>Results</h2>
         <hr>
         <br>
         <div class="row align-items-start">
-            <div class="col ms-auto">
-                <% if(locals.data.drinks[0].strDrinkThumb) { %>
-                    <img src="<%- locals.data.drinks[0].strDrinkThumb %>" class="border border-dark"alt="<%- locals.data.drinks[0].strDrink %>">
+            <div class="col-sm-6 ms-auto">
+                <% if(drinks[0].strDrinkThumb) { %>
+                    <img src="<%- drinks[0].strDrinkThumb %>" class="border border-dark" alt="<%- drinks[0].strDrink %>" style="width: 100%;">
                 <% } else {%>
                     <h4>Link Unavailable</h4>
                 <% } %>
             </div>
-            <div class="col">
+            <div class="col-sm-6">
                 <form action="/reviews" method="GET">
                     <button class="btn btn-outline-primary ml-auto float-end" href="/reviews">Add Review</button>
                 </form>
                 <h1>
-                <% if (locals.data.drinks[0].strDrink) { %>
-                    <%- locals.data.drinks[0].strDrink %>
+                <% if (drinks[0].strDrink) { %>
+                    <%- drinks[0].strDrink %>
                 <% } else { %>
                     Link Unavailable
                 <% } %>
@@ -44,9 +44,9 @@
                 <hr>
                 <h4>
                     Alcoholic? - 
-                    <% if (locals.data.drinks[0].strAlcoholic == "Alcoholic") { %>
+                    <% if (drinks[0].strAlcoholic == "Alcoholic") { %>
                         Yes
-                    <% } else if (locals.data.drinks[0].strAlcoholic == "Non alcoholic") {%>
+                    <% } else if (drinks[0].strAlcoholic == "Non alcoholic") {%>
                         No
                     <% } else { %>
                         Link Unavailable
@@ -55,8 +55,8 @@
                 <hr>
                 <h4>
                      Glass Type - 
-                     <% if (locals.data.drinks[0].strGlass) { %>
-                        <%- locals.data.drinks[0].strGlass %>
+                     <% if (drinks[0].strGlass) { %>
+                        <%- drinks[0].strGlass %>
                     <% } else { %>
                         Link Unavailable
                     <% } %>
@@ -64,8 +64,8 @@
                 <hr>
                 <h4> Instructions:</h4>
                 <h5>
-                <% if (locals.data.drinks[0].strInstructions) { %>
-                    <%- locals.data.drinks[0].strInstructions %>
+                <% if (drinks[0].strInstructions) { %>
+                    <%- drinks[0].strInstructions %>
                 <% } else { %>
                     Link Unavailable
                 <% } %>
@@ -80,20 +80,20 @@
                             <th scope="col">Name</th>
                         </tr>
                     </thead>
-                    <% if (locals.data.drinks[0].strMeasure1 == null)  { %>
+                    <% if (drinks[0].strMeasure1 == null)  { %>
                         Link Unavailible
                     <% } else {%>
-                        <% for(i = 1; ((eval(`locals.data.drinks[0].strMeasure${i}`) != null) || (eval(`locals.data.drinks[0].strIngredient${i}`) != null)); i++) { %>
+                        <% for(i = 1; ((eval(`drinks[0].strMeasure${i}`) != null) || (eval(`drinks[0].strIngredient${i}`) != null)); i++) { %>
                         <tbody>
                             <tr>
                                 <th scope="row"><%- i %></th>
-                                <% if (eval(`locals.data.drinks[0].strMeasure${i}`)) { %>
-                                    <td><%- eval(`locals.data.drinks[0].strMeasure${i}`) %></td>
+                                <% if (eval(`drinks[0].strMeasure${i}`)) { %>
+                                    <td><%- eval(`drinks[0].strMeasure${i}`) %></td>
                                 <% } else { %>
                                     <td>-</td>
                                 <% } %>
-                                <% if (eval(`locals.data.drinks[0].strIngredient${i}`)) { %>
-                                    <td><%- eval(`locals.data.drinks[0].strIngredient${i}`) %></td>
+                                <% if (eval(`drinks[0].strIngredient${i}`)) { %>
+                                    <td><%- eval(`drinks[0].strIngredient${i}`) %></td>
                                 <% } else { %>
                                     <td>-</td>
                                 <% } %>
